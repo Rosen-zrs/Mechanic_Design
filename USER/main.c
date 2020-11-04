@@ -20,7 +20,8 @@
 	 
 	 PS2_Init();			
 	 PS2_SetInit();		 //配配置初始化,配置“红绿灯模式”，并选择是否可以修改
-		
+	
+	 //
 	 while(1)
 	 {
 		 if( !PS2_RedLight())
