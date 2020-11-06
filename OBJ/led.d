@@ -33,7 +33,7 @@
 ..\obj\led.o: ..\HARDWARE\TIMER\time.h
 ..\obj\led.o: ..\SYSTEM\sys\sys.h
 ..\obj\led.o: ..\HARDWARE\PWM\pwm.h
-..\obj\led.o: ..\HARDWARE\USART3\usart3.h
+..\obj\led.o: ..\SYSTEM\usart\usart.h
 ..\obj\led.o: D:\Program Files\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\led.o: ..\HARDWARE\PS2\pstwo.h
 ..\obj\led.o: ..\SYSTEM\delay\delay.h

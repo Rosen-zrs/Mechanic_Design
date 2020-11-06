@@ -5,7 +5,7 @@
 
 #include "time.h"
 #include "pwm.h"
-#include "usart3.h"
+#include "usart.h"	  
 #include "pstwo.h"
 #include "led.h"
 #include "delay.h"
@@ -66,5 +66,8 @@ void WFI_SET(void);		//执行WFI指令
 void INTX_DISABLE(void);//关闭所有中断
 void INTX_ENABLE(void);	//开启所有中断
 void MSR_MSP(u32 addr);	//设置堆栈地址
+
+
+void Stm32_Clock_Init(u8 PLL);
 
 #endif

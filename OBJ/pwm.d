@@ -33,7 +33,7 @@
 ..\obj\pwm.o: ..\HARDWARE\TIMER\time.h
 ..\obj\pwm.o: ..\SYSTEM\sys\sys.h
 ..\obj\pwm.o: ..\HARDWARE\PWM\pwm.h
-..\obj\pwm.o: ..\HARDWARE\USART3\usart3.h
+..\obj\pwm.o: ..\SYSTEM\usart\usart.h
 ..\obj\pwm.o: D:\Program Files\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\pwm.o: ..\HARDWARE\PS2\pstwo.h
 ..\obj\pwm.o: ..\SYSTEM\delay\delay.h

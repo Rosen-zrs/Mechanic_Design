@@ -32,9 +32,8 @@
 ..\obj\usart.o: ..\HARDWARE\TIMER\time.h
 ..\obj\usart.o: ..\SYSTEM\sys\sys.h
 ..\obj\usart.o: ..\HARDWARE\PWM\pwm.h
-..\obj\usart.o: ..\HARDWARE\USART3\usart3.h
+..\obj\usart.o: ..\SYSTEM\usart\usart.h
 ..\obj\usart.o: D:\Program Files\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\usart.o: ..\HARDWARE\PS2\pstwo.h
 ..\obj\usart.o: ..\SYSTEM\delay\delay.h
 ..\obj\usart.o: ..\HARDWARE\LED\led.h
-..\obj\usart.o: ..\SYSTEM\usart\usart.h
