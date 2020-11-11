@@ -7,10 +7,14 @@
  int main(void)
  {	
 	 u8 key; 
-	 int flag = 0;
+	 int claw_angle=1850;//爪子舵机的角度
+	 int max_angle=1810;//在1800~1850间，爪子舵机的角度设置
+	 int min_angle=1860;//在1850~1900间
 	 s16 speed,speed1,speed2; 
 	 s16 swerve;           //转弯量	 
- 
+	 int first_flag=1;//第一级关节的标志位
+	 int second_flag=1;//第二级关节的标志位
+	 //int third_flag=1;
 	 delay_init(); //延时函数初始化
 	 
 	 Stm32_Clock_Init(9); //系统时钟设置
@@ -79,41 +83,60 @@
 					 //机械臂一级关节
 					 case PSB_GREEN:
 					 {
-						 LED0 = ~LED0;
-						 /**********************************************/
 						 
+						 /**********************************************/
+						if(first_flag)
+						{
+							TIM_SetCompare2(TIM2,1950);//PA1，值待修改
+							first_flag=0;
+						}
+						else
+						{
+							TIM_SetCompare2(TIM2,1750);//PA1,值待修改
+							first_flag=1;
+						}
+			
 						 break;
 					 }
 					 //机械臂二级关节
 					 case PSB_BLUE:
 					 {
-						 LED1 = ~LED1;
-						 /**********************************************/
 						 
+						 /**********************************************/
+						 if(second_flag)
+						{
+							TIM_SetCompare3(TIM2,1950);//PA2，值待修改
+							second_flag=0;
+						}
+						else
+						{
+							TIM_SetCompare3(TIM2,1750);//PA2,值待修改
+							second_flag=1;
+						}
 						 break;
 					 }
 					 //抓取
 					 case PSB_RED:
 					 {
-						 if(flag)
+						 if(claw_angle<max_angle-5)
 						 {
-							 /*******************放开方块*******************/
-							 //okkkkkkkkkkkkkkk
-							 
-							 /**********************************************/
-							 flag = 0;
+								TIM_SetCompare4(TIM2,claw_angle+=5);//PA3,值待修改
+								printf("  \r\n claw_angle is %d  \r\n",claw_angle);
 						 }
-						 else
-						 {
-							 /*******************抓取方块*******************/
-							 
-							 
-							 /**********************************************/
-							 
-							 flag = 1;
-						 }
+					 
 						 break;
 					 }
+					 //放开
+					  case PSB_PINK:
+						{
+							if(claw_angle>min_angle+5)
+						 {
+								TIM_SetCompare4(TIM2,claw_angle-=5);//PA3,值待修改
+							  printf("  \r\n claw_angle is %d  \r\n",claw_angle);
+						 }
+							
+							break;
+						}
 					 case PSB_L1:
 					 {
 						 PS2_Vibration(0xFF,0x00);  //发出震动后必须有延时  delay_ms(1000);
