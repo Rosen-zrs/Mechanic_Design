@@ -13,6 +13,8 @@
  
 	 delay_init(); //延时函数初始化
 	 
+	 delay_ms(100);
+	 
 	 Stm32_Clock_Init(9); //系统时钟设置
 	 
 	 LED_Init();
@@ -33,8 +35,9 @@
 	 {
 		 if( !PS2_RedLight())
 		 {
+			 
 			 delay_ms(50);	 //延时很重要不可去
-				
+			 
 			 key = PS2_DataKey();	 //手柄按键捕获处理
 				
 			 speed = -(PS2_AnologData(PSS_LY)-127) * 10;	   
@@ -116,14 +119,14 @@
 					 }
 					 case PSB_L1:
 					 {
-						 PS2_Vibration(0xFF,0x00);  //发出震动后必须有延时  delay_ms(1000);
+						 PS2_Vibration(0x00,0xFF);  //发出震动后必须有延时  delay_ms(1000);
 						 delay_ms(500);
 						 PS2_Vibration(0x00,0x00); 
 						 break;
 					 }
 					 case PSB_R1:
 					 {
-						 PS2_Vibration(0x00,0xFF);  //发出震动后必须有延时  delay_ms(1000);
+						 PS2_Vibration(0xFF,0x00);  //发出震动后必须有延时  delay_ms(1000);
 						 delay_ms(500);
 						 PS2_Vibration(0x00,0x00); 
 						 break;

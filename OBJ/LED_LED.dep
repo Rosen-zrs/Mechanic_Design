@@ -1,5 +1,5 @@
 Dependencies for Project 'LED', Target 'LED': (DO NOT MODIFY !)
-F (.\main.c)(0x5FA49B95)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\HARDWARE\LED -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\STM32F10x_FWLib\inc -I ..\CORE -I ..\HARDWARE\TIMER -I ..\HARDWARE\PWM -I ..\HARDWARE\USART3 -I ..\HARDWARE\PS2-I.\RTE\_LED-I"D:\Program Files\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\Program Files\ARM\CMSIS\Include"-D__UVISION_VERSION="528" -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
+F (.\main.c)(0x5FABBC65)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I ..\HARDWARE\LED -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\USER -I ..\STM32F10x_FWLib\inc -I ..\CORE -I ..\HARDWARE\TIMER -I ..\HARDWARE\PWM -I ..\HARDWARE\USART3 -I ..\HARDWARE\PS2-I.\RTE\_LED-I"D:\Program Files\Keil\STM32F1xx_DFP\2.3.0\Device\Include"-I"D:\Program Files\ARM\CMSIS\Include"-D__UVISION_VERSION="528" -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
 I (..\SYSTEM\sys\sys.h)(0x5FA2A745)
 I (..\USER\stm32f10x.h)(0x5F9C3360)
 I (..\CORE\core_cm3.h)(0x5F9C3360)
