@@ -55,9 +55,9 @@ void PS2_Cmd(u8 CMD)
 		else DO_L;
 
 		CLK_H;                        // ±÷”¿≠∏ﬂ
-		delay_us(50);
+		delay_us(10);
 		CLK_L;
-		delay_us(50);
+		delay_us(10);
 		CLK_H;
 		if(DI)
 			Data[1] = ref|Data[1];
@@ -96,12 +96,12 @@ void PS2_ReadData(void)
 		{
 			CLK_H;
 			CLK_L;
-			delay_us(50);
+			delay_us(10);
 			CLK_H;
 		      if(DI)
 		      Data[byte] = ref|Data[byte];
 		}
-        delay_us(50);
+        delay_us(10);
 	}
 	CS_H;	
 }

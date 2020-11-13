@@ -158,7 +158,7 @@ void Set_hou_motor(int motor_03, int motor_04)
 	
 }
 
-//舵机的pwm,PA0,A1,A2,A3->ch1,ch2,ch3,ch4
+//舵机的pwm,PA0,A1,A2,A3->ch1,ch2,ch3,ch4,CH1暂不用
 void TIM2_DUOJI_PWM_Init(u16 arr,u16 psc)
 {
 		GPIO_InitTypeDef GPIO_InitStructure;
@@ -168,7 +168,7 @@ void TIM2_DUOJI_PWM_Init(u16 arr,u16 psc)
 		RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA , ENABLE);
 		//①使能 GPIO 外设时钟使能
 		//设置该引脚为复用输出功能,输出 TIM2 CH2 的 PWM 脉冲波形
-		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1|GPIO_Pin_2|GPIO_Pin_3; //TIM_CH1
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1|GPIO_Pin_2|GPIO_Pin_3; 
 		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; //复用推挽输出
 		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 		
@@ -194,9 +194,9 @@ void TIM2_DUOJI_PWM_Init(u16 arr,u16 psc)
 		TIM_CtrlPWMOutputs(TIM2,ENABLE); //⑤MOE 主输出使能
 		
 		
-		TIM_OC2PreloadConfig(TIM2, TIM_OCPreload_Enable); //CH2 预装载使能
-		TIM_OC3PreloadConfig(TIM2, TIM_OCPreload_Enable); //CH3 预装载使能
-		TIM_OC4PreloadConfig(TIM2, TIM_OCPreload_Enable); //CH4 预装载使能
+		TIM_OC2PreloadConfig(TIM2, TIM_OCPreload_Enable); //CH2 预装载使能//PA1
+		TIM_OC3PreloadConfig(TIM2, TIM_OCPreload_Enable); //CH3 预装载使能//PA2
+		TIM_OC4PreloadConfig(TIM2, TIM_OCPreload_Enable); //CH4 预装载使能//PA3
 		
 		TIM_ARRPreloadConfig(TIM2, ENABLE); //使能 TIMx 在 ARR 上的预装载寄存器
 		TIM_Cmd(TIM2, ENABLE); //④使能 TIM2
