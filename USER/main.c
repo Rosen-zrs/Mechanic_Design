@@ -8,12 +8,11 @@
  {	
 	 u8 key; 
 	 int i;
-	 int claw_angle=1850;//×¦×Ó¶æ»úµÄ½Ç¶È
 	 
 	 s16 speed,speed1,speed2; 
 	 s16 swerve;           //×ªÍäÁ¿	 
 	 
-	 int first_angle = 1760;
+	 int first_angle = 1768;
 	 int second_angle = 1860;
 	 
 	
@@ -25,7 +24,7 @@
 	 
 	 LED_Init();
 	 
-	 NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //ÉèÖÃ NVIC ÖÐ¶Ï·Ö×é 2:2 Î»
+	 NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //É	èÖÃ NVIC ÖÐ¶Ï·Ö×é 2:2 Î»
 	 uart_init(9600);
 	 
 	 MOTOR_GPIO_init();
@@ -94,11 +93,46 @@
 						 delay_ms(20);
 						 if(key == PSB_L1)
 						 {
-							 for(i=0;i<=17;i+= 10)
-							 {
-								 TIM_SetCompare2(TIM2,1760 + i);//PA1£¬Öµ´ýÐÞ¸Ä
-							   delay_ms(10);				 
-							 }
+							 first_angle = 1770;
+							 TIM_SetCompare2(TIM2,1770);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);		
+							 TIM_SetCompare2(TIM2,1780);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);		
+							 TIM_SetCompare2(TIM2,1790);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);		
+							 TIM_SetCompare2(TIM2,1800);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);
+							 TIM_SetCompare2(TIM2,1810);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);		
+							 TIM_SetCompare2(TIM2,1820);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);
+							 TIM_SetCompare2(TIM2,1830);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);		
+							 TIM_SetCompare2(TIM2,1840);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);
+							 TIM_SetCompare2(TIM2,1850);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);		
+							 TIM_SetCompare2(TIM2,1860);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);
+							 TIM_SetCompare2(TIM2,1870);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);		
+							 TIM_SetCompare2(TIM2,1880);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);
+							 TIM_SetCompare2(TIM2,1890);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);
+							 TIM_SetCompare2(TIM2,1900);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);
+							 TIM_SetCompare2(TIM2,1910);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);
+							 TIM_SetCompare2(TIM2,1920);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);
+							 TIM_SetCompare2(TIM2,1930);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);
+							 TIM_SetCompare2(TIM2,1940);//PA1£¬Öµ´ýÐÞ¸Ä
+							 delay_ms(10);
+							 
+
+							 
 					  }
 						 break;
 					 }
@@ -107,7 +141,7 @@
 						 delay_ms(20);
 						 if(key == PSB_L2)
 						 {
-							TIM_SetCompare2(TIM2,1830);//PA1,Öµ´ýÐÞ¸Ä
+							TIM_SetCompare2(TIM2,1768);//PA1,Öµ´ýÐÞ¸Ä
 							delay_ms(10);
 						 }
 						 break;

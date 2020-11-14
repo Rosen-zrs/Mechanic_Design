@@ -3,7 +3,7 @@
 ..\obj\time.o: ..\SYSTEM\sys\sys.h
 ..\obj\time.o: ..\USER\stm32f10x.h
 ..\obj\time.o: ..\CORE\core_cm3.h
-..\obj\time.o: D:\MDK5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\time.o: D:\Program Files\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\time.o: ..\USER\system_stm32f10x.h
 ..\obj\time.o: ..\USER\stm32f10x_conf.h
 ..\obj\time.o: ..\STM32F10x_FWLib\inc\stm32f10x_adc.h
@@ -34,7 +34,7 @@
 ..\obj\time.o: ..\HARDWARE\PWM\pwm.h
 ..\obj\time.o: ..\SYSTEM\sys\sys.h
 ..\obj\time.o: ..\SYSTEM\usart\usart.h
-..\obj\time.o: D:\MDK5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\time.o: D:\Program Files\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\time.o: ..\HARDWARE\PS2\pstwo.h
 ..\obj\time.o: ..\SYSTEM\delay\delay.h
 ..\obj\time.o: ..\HARDWARE\LED\led.h
