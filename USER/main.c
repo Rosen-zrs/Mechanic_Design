@@ -13,8 +13,8 @@
 	 s16 speed,speed1,speed2; 
 	 s16 swerve;           //转弯量	 
 	 
-	 int first_angle = 1930;
-	 int second_angle = 1905;
+	 int first_angle = 1760;
+	 int second_angle = 1860;
 	 
 	
 	 delay_init(); //延时函数初始化
@@ -36,8 +36,8 @@
 
 	 PS2_SetInit();		 //配配置初始化,配置“红绿灯模式”，并选择是否可以修改
 	 
-	 TIM_SetCompare2(TIM2,first_angle);
-	 TIM_SetCompare3(TIM2,second_angle);
+	 TIM_SetCompare2(TIM2,first_angle);//一级关节初始值
+	 TIM_SetCompare3(TIM2,second_angle);//二级关节初始值
 	 
 	 
 	 while(1)
@@ -94,18 +94,11 @@
 						 delay_ms(20);
 						 if(key == PSB_L1)
 						 {
-							 TIM_SetCompare2(TIM2,1880);//PA1，值待修改
-							 delay_ms(10);
-							 TIM_SetCompare2(TIM2,1890);//PA1，值待修改
-							 delay_ms(10);
-							 TIM_SetCompare2(TIM2,1900);//PA1，值待修改
-							 delay_ms(10);
-							 TIM_SetCompare2(TIM2,1910);//PA1，值待修改
-							 delay_ms(30);
-							 TIM_SetCompare2(TIM2,1920);//PA1，值待修改
-							 delay_ms(30);
-							 TIM_SetCompare2(TIM2,1930);//PA1，值待修改
-							 delay_ms(30);
+							 for(i=0;i<=17;i+= 10)
+							 {
+								 TIM_SetCompare2(TIM2,1760 + i);//PA1，值待修改
+							   delay_ms(10);				 
+							 }
 					  }
 						 break;
 					 }
@@ -126,7 +119,7 @@
 						 delay_ms(20);
 						 if(key == PSB_R1)
 						 {
-							TIM_SetCompare3(TIM2,1905);//PA2，值待修改
+							TIM_SetCompare3(TIM2,1860);//PA2，值待修改
 							delay_ms(10);
 					 }
 						 break;
@@ -136,7 +129,7 @@
 							delay_ms(10);
 							if(key == PSB_R2)
 							{
-								TIM_SetCompare3(TIM2,1950);//PA2,值待修改
+								TIM_SetCompare3(TIM2,1860);//PA2,值待修改
 								delay_ms(10);
 							}
 							break;
