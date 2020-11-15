@@ -16,7 +16,7 @@ void MOTOR_GPIO_init(void)
 	GPIOB_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 		 //推挽输出
 	GPIOB_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;		 //IO口速度为50MHz
 	
-	GPIOC_InitStructure.GPIO_Pin = GPIO_Pin_6|GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9;				 //端口配置
+	GPIOC_InitStructure.GPIO_Pin = GPIO_Pin_6|GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_2;				 //端口配置
 	GPIOC_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 		 //推挽输出
 	GPIOC_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;		 //IO口速度为50MHz
 	
@@ -24,7 +24,7 @@ void MOTOR_GPIO_init(void)
 	GPIO_Init(GPIOC, &GPIOC_InitStructure);
 	
 	GPIO_SetBits(GPIOB,GPIO_Pin_2|GPIO_Pin_3|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_6|GPIO_Pin_7|GPIO_Pin_8);				//输出高电平		 
-	GPIO_SetBits(GPIOC,GPIO_Pin_6|GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9);	//初始化都为高电平
+	GPIO_SetBits(GPIOC,GPIO_Pin_6|GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_2);	//初始化都为高电平
 	
 }
 
@@ -158,6 +158,26 @@ void Set_hou_motor(int motor_03, int motor_04)
 	
 }
 
+void Set_chouji_motor(int motor_00)
+{
+  if(motor_00>0)
+	{
+	  yuan_AIN1=1;//正转
+		yuan_AIN2=0;
+	}
+	else
+	{
+	  yuan_AIN1=0;//反转
+		yuan_AIN2=1;
+	}
+	//研究pwm值
+	TIM_SetCompare4(TIM1,GFP_abs(motor_00));//PB0
+	
+	
+	
+	
+}
+
 //舵机的pwm,PA0,A1,A2,A3->ch1,ch2,ch3,ch4,CH1暂不用
 void TIM2_DUOJI_PWM_Init(u16 arr,u16 psc)
 {
@@ -205,5 +225,90 @@ void TIM2_DUOJI_PWM_Init(u16 arr,u16 psc)
 	
 }
 
+//圆筒的张开：PA11，通道4，电机的抽离：PA8，通道1
+void TIM1_YUANTONG_PWM_Init(u16 arr,u16 psc)
+{
+		GPIO_InitTypeDef GPIO_InitStructure;
+		TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+		TIM_OCInitTypeDef TIM_OCInitStructure;
+		RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);// ①使能 TIM1 时钟
+		RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA , ENABLE);
+		//①使能 GPIO 外设时钟使能
+		//设置该引脚为复用输出功能,输出 TIM1 CH2 的 PWM 脉冲波形
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8|GPIO_Pin_11; //TIM_CH1
+		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; //复用推挽输出
+		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+		
+		TIM_TimeBaseStructure.TIM_Period = arr;
+		//设置在下一个更新事件装入活动的自动重装载寄存器周期的值 80K
+		TIM_TimeBaseStructure.TIM_Prescaler =psc;
+		//设置用来作为 TIMx 时钟频率除数的预分频值 不分频
+		TIM_TimeBaseStructure.TIM_ClockDivision = 0; //设置时钟分割:TDTS = Tck_tim
+	  GPIO_Init(GPIOA, &GPIO_InitStructure);
+		TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; //向上计数
+		TIM_TimeBaseInit(TIM1, &TIM_TimeBaseStructure); //②初始化 TIMx
+		TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM2; //脉宽调制模式 2
+		TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable; //比较输出使能
+		TIM_OCInitStructure.TIM_Pulse = 0; //设置待装入捕获比较寄存器的脉冲值
+		TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High; //输出极性高
+		
+		TIM_OC1Init(TIM1, &TIM_OCInitStructure); //③初始化外设 TIMx
+		TIM_OC4Init(TIM1, &TIM_OCInitStructure); //③初始化外设 TIMx
+		
+		TIM_CtrlPWMOutputs(TIM1,ENABLE); //⑤MOE 主输出使能
+		
+		TIM_OC1PreloadConfig(TIM1, TIM_OCPreload_Enable); //CH2 预装载使能
+		TIM_OC4PreloadConfig(TIM1, TIM_OCPreload_Enable); //CH2 预装载使能
+		
+		TIM_ARRPreloadConfig(TIM1, ENABLE); //使能 TIMx 在 ARR 上的预装载寄存器
+		TIM_Cmd(TIM1, ENABLE); //④使能 TIM1
+	
+	
+	
+}
+//
+void TIM4_CHUCUN_PWM_Init(u16 arr,u16 psc)
+{
+		GPIO_InitTypeDef GPIO_InitStructure;
+		TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+		TIM_OCInitTypeDef TIM_OCInitStructure;
+		RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);// ①使能 TIM2 时钟
+		RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB , ENABLE);
+		//①使能 GPIO 外设时钟使能
+		//设置该引脚为复用输出功能,输出 TIM4 CH4 的 PWM 脉冲波形
+		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9; 
+		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; //复用推挽输出
+		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+		
+		TIM_TimeBaseStructure.TIM_Period = arr;
+		//设置在下一个更新事件装入活动的自动重装载寄存器周期的值 80K
+		TIM_TimeBaseStructure.TIM_Prescaler =psc;
+		//设置用来作为 TIMx 时钟频率除数的预分频值 不分频
+		TIM_TimeBaseStructure.TIM_ClockDivision = 0; //设置时钟分割:TDTS = Tck_tim
+	  GPIO_Init(GPIOB, &GPIO_InitStructure);
+		TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; //向上计数
+		TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure); //②初始化 TIMx
+	
+		TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM2; //脉宽调制模式 2
+		TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable; //比较输出使能
+		TIM_OCInitStructure.TIM_Pulse = 0; //设置待装入捕获比较寄存器的脉冲值
+		TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High; //输出极性高
+		
+		
+		
+		TIM_OC4Init(TIM4, &TIM_OCInitStructure); //③初始化外设 TIMx
+		
+		TIM_CtrlPWMOutputs(TIM4,ENABLE); //⑤MOE 主输出使能
+		
+		
+		
+		TIM_OC4PreloadConfig(TIM4, TIM_OCPreload_Enable); //CH4 预装载使能//PB9
+		
+		TIM_ARRPreloadConfig(TIM4, ENABLE); //使能 TIMx 在 ARR 上的预装载寄存器
+		TIM_Cmd(TIM4, ENABLE); //④使能 TIM2
+	
+	
+	
+}
 
 

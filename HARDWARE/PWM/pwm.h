@@ -14,9 +14,16 @@
 #define hou_BIN1 PBout(5)
 #define hou_STBY PBout(8)
 
+#define yuan_AIN2 PCout(0)
+#define yuan_AIN1 PCout(1)
+#define yuan_STBY PCout(2)
+
 void Set_qian_motor(int motor_01, int motor_02);
 void Set_hou_motor(int motor_03, int motor_04);
 void MOTOR_GPIO_init(void);
 void TIM3_DIANJI_PWM_Init(u16 arr,u16 psc);
 void TIM2_DUOJI_PWM_Init(u16 arr,u16 psc);
+void TIM1_YUANTONG_PWM_Init(u16 arr,u16 psc);
+void Set_chouji_motor(int motor_00);
+void TIM4_CHUCUN_PWM_Init(u16 arr,u16 psc);
 #endif
